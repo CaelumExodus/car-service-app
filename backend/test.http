@@ -1,0 +1,16 @@
+### Create the table
+GET http://localhost:3000/setup
+Content-Type: application/json
+
+### Insert a new school
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+  "name": "Greenwood High",
+  "address": "123 Maple St"
+}
+
+### Get all schools
+GET http://localhost:3000/
+Content-Type: application/json

@@ -1,0 +1,31 @@
+### Get all parts
+GET http://localhost:3000/parts
+Content-Type: application/json
+
+### Create a new part
+POST http://localhost:3000/parts
+Content-Type: application/json
+
+{
+  "partname": "Engine Oil",
+  "partcategory": "Fluids",
+  "quantityinstock": 100,
+  "unitprice": 10.99,
+  "supplier": "ABC Parts Supplier"
+}
+
+### Update an existing part
+PUT http://localhost:3000/parts/1
+Content-Type: application/json
+
+{
+  "partname": "Brake Pads",
+  "partcategory": "Brakes",
+  "quantityinstock": 50,
+  "unitprice": 25.99,
+  "supplier": "XYZ Parts Supplier"
+}
+
+### Delete a part
+DELETE http://localhost:3000/parts/1
+Content-Type: application/json

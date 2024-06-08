@@ -1,0 +1,29 @@
+### Get all complaints
+GET http://localhost:3000/complaints
+Content-Type: application/json
+
+### Create a new complaint
+POST http://localhost:3000/complaints
+Content-Type: application/json
+
+{
+  "orderid": 1,
+  "clientid": 1,
+  "description": "Issue with brake noise",
+  "status": "pending"
+}
+
+### Update an existing complaint
+PUT http://localhost:3000/complaints/1
+Content-Type: application/json
+
+{
+  "orderid": 2,
+  "clientid": 2,
+  "description": "Resolved brake issue",
+  "status": "resolved"
+}
+
+### Delete a complaint
+DELETE http://localhost:3000/complaints/1
+Content-Type: application/json

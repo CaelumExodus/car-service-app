@@ -1,0 +1,31 @@
+### Get all invoices
+GET http://localhost:3000/invoices
+Content-Type: application/json
+
+### Create a new invoice
+POST http://localhost:3000/invoices
+Content-Type: application/json
+
+{
+  "orderid": 1,
+  "clientid": 1,
+  "amount": 500.99,
+  "duedate": "2024-06-15",
+  "status": "pending"
+}
+
+### Update an existing invoice
+PUT http://localhost:3000/invoices/1
+Content-Type: application/json
+
+{
+  "orderid": 2,
+  "clientid": 2,
+  "amount": 800.50,
+  "duedate": "2024-06-20",
+  "status": "paid"
+}
+
+### Delete an invoice
+DELETE http://localhost:3000/invoices/1
+Content-Type: application/json

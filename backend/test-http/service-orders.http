@@ -1,0 +1,27 @@
+### Get all service orders
+GET http://localhost:3000/serviceorders
+Content-Type: application/json
+
+### Create a new service order
+POST http://localhost:3000/serviceorders
+Content-Type: application/json
+
+{
+  "clientid": 1,
+  "status": "pending",
+  "totalcost": 1000
+}
+
+### Update an existing service order
+PUT http://localhost:3000/serviceorders/1
+Content-Type: application/json
+
+{
+  "clientid": 2,
+  "status": "completed",
+  "totalcost": 1500
+}
+
+### Delete a service order
+DELETE http://localhost:3000/serviceorders/1
+Content-Type: application/json

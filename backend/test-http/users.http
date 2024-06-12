@@ -29,3 +29,12 @@ Content-Type: application/json
 ### Delete a user
 DELETE http://localhost:3000/users/1
 Content-Type: application/json
+
+### Login as an existing user
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "username": "jan.kowalski",
+  "password": "password123"
+}

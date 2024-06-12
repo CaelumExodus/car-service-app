@@ -44,3 +44,28 @@ exports.deleteUser = async (req, res) => {
         res.sendStatus(500);
     }
 };
+
+exports.loginUser = async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        // Fetch user from the database by username
+        const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(401).send({ message: 'Invalid username or password' });
+        }
+
+        // Compare provided password with the stored password
+        if (password !== user.password) {
+            return res.status(401).send({ message: 'Invalid username or password' });
+        }
+
+        res.status(200).send({ message: 'Login successful', userId: user.userId });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+};
+

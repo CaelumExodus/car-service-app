@@ -15,6 +15,8 @@ app.post('/users', usersController.createUser);
 app.put('/users/:id', usersController.updateUser);
 app.delete('/users/:id', usersController.deleteUser);
 
+app.post('/users/login', usersController.loginUser);
+
 // Routes for service orders
 app.get('/serviceorders', serviceOrdersController.getServiceOrders);
 app.post('/serviceorders', serviceOrdersController.createServiceOrder);

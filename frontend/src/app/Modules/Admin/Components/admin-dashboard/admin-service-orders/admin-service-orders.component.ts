@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceOrder, User } from "../../../../../Models/Models";
+import { ServiceOrder } from "../../../../../Models/Models";
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
 

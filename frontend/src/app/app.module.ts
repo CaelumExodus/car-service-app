@@ -5,14 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './Auth/log-in/log-in.component';
 import { FormsModule } from "@angular/forms";
-import { HomeComponent } from './Components/home/home.component';
 import { HttpClientModule } from "@angular/common/http";
+import { AdminDashboardComponent } from './Modules/Admin/Components/admin-dashboard/admin-dashboard.component';
+import { AdminUsersComponent } from './Modules/Admin/Components/admin-dashboard/admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
-    HomeComponent
+    AdminDashboardComponent,
+    AdminUsersComponent
   ],
   imports: [
     BrowserModule,

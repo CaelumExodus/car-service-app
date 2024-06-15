@@ -14,9 +14,10 @@ export class LogInComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   onLogin(): void {
-    this.authService.login(this.username, this.password).subscribe(response => {
-      this.authService.saveUserData(response.userId, response.userRole);
-      this.router.navigate(['/home']);
+    this.authService.login(this.username, this.password).subscribe(user => {
+      this.authService.saveUserData(user.userId, user.userRole);
+
+      this.router.navigate([`/${user.userRole}`]);
     }, error => {
       console.error('Login failed', error);
     });

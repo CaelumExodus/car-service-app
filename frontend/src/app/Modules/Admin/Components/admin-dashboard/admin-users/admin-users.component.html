@@ -1,0 +1,23 @@
+<!-- admin-users.component.html -->
+<div class="overflow-x-auto">
+	<table class="min-w-full bg-white rounded-lg overflow-hidden">
+		<thead class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+		<tr>
+			<th class="py-3 px-6 text-left">User ID</th>
+			<th class="py-3 px-6 text-left">Username</th>
+			<th class="py-3 px-6 text-left">Email</th>
+			<th class="py-3 px-6 text-left">Phone Number</th>
+			<th class="py-3 px-6 text-left">Role</th>
+		</tr>
+		</thead>
+		<tbody class="text-gray-600 text-sm font-light">
+		<tr *ngFor="let user of users">
+			<td class="py-3 px-6 text-left">{{ user.userid }}</td>
+			<td class="py-3 px-6 text-left">{{ user.username }}</td>
+			<td class="py-3 px-6 text-left">{{ user.email }}</td>
+			<td class="py-3 px-6 text-left">{{ user.phonenumber }}</td>
+			<td class="py-3 px-6 text-left">{{ user.role }}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

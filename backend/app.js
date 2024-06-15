@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors'); // Import the cors package
 const usersController = require('./controllers/users-controller');
 const serviceOrdersController = require('./controllers/service-orders-controller');
 const partsController = require('./controllers/parts-controller');
@@ -7,6 +8,11 @@ const complaintsController = require('./controllers/complaints-controller');
 const port = 3000;
 
 const app = express();
+
+// Enable CORS for any origin
+app.use(cors());
+
+// Middleware for parsing JSON bodies
 app.use(express.json());
 
 // Routes for users
@@ -14,7 +20,6 @@ app.get('/users', usersController.getUsers);
 app.post('/users', usersController.createUser);
 app.put('/users/:id', usersController.updateUser);
 app.delete('/users/:id', usersController.deleteUser);
-
 app.post('/users/login', usersController.loginUser);
 
 // Routes for service orders

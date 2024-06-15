@@ -1,9 +1,9 @@
 ### Get all service orders
-GET http://localhost:3000/serviceorders
+GET http://localhost:3000/service-orders
 Content-Type: application/json
 
 ### Create a new service order
-POST http://localhost:3000/serviceorders
+POST http://localhost:3000/service-orders
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Update an existing service order
-PUT http://localhost:3000/serviceorders/1
+PUT http://localhost:3000/service-orders/1
 Content-Type: application/json
 
 {
@@ -23,5 +23,5 @@ Content-Type: application/json
 }
 
 ### Delete a service order
-DELETE http://localhost:3000/serviceorders/1
+DELETE http://localhost:3000/service-orders/1
 Content-Type: application/json

@@ -5,6 +5,9 @@ import { AuthGuard } from "./Auth/auth.guard";
 import { AdminDashboardComponent } from "./Modules/Admin/Components/admin-dashboard/admin-dashboard.component";
 import { RoleGuard } from "./Auth/role.guard";
 import { AdminUsersComponent } from "./Modules/Admin/Components/admin-dashboard/admin-users/admin-users.component";
+import {
+  AdminServiceOrdersComponent
+} from "./Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -16,6 +19,7 @@ const routes: Routes = [
     data: { expectedRole: 'admin' },
     children: [
       { path: 'users', component: AdminUsersComponent },
+      { path: 'service-orders', component: AdminServiceOrdersComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
     ]

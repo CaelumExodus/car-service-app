@@ -23,10 +23,10 @@ app.delete('/users/:id', usersController.deleteUser);
 app.post('/users/login', usersController.loginUser);
 
 // Routes for service orders
-app.get('/serviceorders', serviceOrdersController.getServiceOrders);
-app.post('/serviceorders', serviceOrdersController.createServiceOrder);
-app.put('/serviceorders/:id', serviceOrdersController.updateServiceOrder);
-app.delete('/serviceorders/:id', serviceOrdersController.deleteServiceOrder);
+app.get('/service-orders', serviceOrdersController.getServiceOrders);
+app.post('/service-orders', serviceOrdersController.createServiceOrder);
+app.put('/service-orders/:id', serviceOrdersController.updateServiceOrder);
+app.delete('/service-orders/:id', serviceOrdersController.deleteServiceOrder);
 
 // Routes for parts
 app.get('/parts', partsController.getParts);

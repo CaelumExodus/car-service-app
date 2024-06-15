@@ -1,4 +1,3 @@
-// controllers/usersController.js
 const pool = require('../db');
 
 exports.getUsers = async (req, res) => {

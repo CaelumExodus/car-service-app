@@ -1,4 +1,3 @@
-// controllers/complaintsController.js
 const pool = require('../db');
 
 exports.getComplaints = async (req, res) => {

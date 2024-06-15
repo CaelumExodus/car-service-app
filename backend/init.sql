@@ -60,10 +60,10 @@ CREATE TABLE ServiceOrderParts (
 
 -- Dodawanie użytkowników
 INSERT INTO Users (Username, Password, Email, PhoneNumber, Role) VALUES
-('jan.kowalski', 'password123', 'jan.kowalski@example.com', '123456789', 'client'),
-('anna.nowak', 'password456', 'anna.nowak@example.com', '987654321', 'service'),
-('piotr.wisniewski', 'password789', 'piotr.wisniewski@example.com', '123123123', 'warehouse'),
-('admin', 'adminpassword', 'admin@example.com', '321321321', 'admin');
+('LClient', 'PClient', 'jan.kowalski@example.com', '123456789', 'client'),
+('LService', 'PService', 'anna.nowak@example.com', '987654321', 'service'),
+('LWarehouse', 'PWarehouse', 'piotr.wisniewski@example.com', '123123123', 'warehouse'),
+('LAdmin', 'PAdmin', 'admin@example.com', '321321321', 'admin');
 
 -- Dodawanie części
 INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier) VALUES

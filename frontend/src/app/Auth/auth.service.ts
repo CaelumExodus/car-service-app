@@ -27,6 +27,23 @@ export class AuthService {
     Cookies.set('userRole', userRole);
   }
 
+  getUserId(): number | undefined {
+    const userId = Cookies.get('userId');
+    return userId ? +userId : undefined;
+  }
+
+  getUserRole(): string | undefined {
+    return Cookies.get('userRole');
+  }
+
+  getUserCredentials(): UserCredentials {
+    return {
+      id: this.getUserId(),
+      role: this.getUserRole()
+    }
+  }
+
+
   isLoggedIn(): boolean {
     return !!Cookies.get('userId');
   }
@@ -36,4 +53,9 @@ export class AuthService {
     Cookies.remove('userRole');
     this.router.navigate(['/login']);
   }
+}
+
+export interface UserCredentials {
+  id: number | undefined,
+  role: string | undefined
 }

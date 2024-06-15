@@ -1,4 +1,3 @@
-// controllers/partsController.js
 const pool = require('../db');
 
 exports.getParts = async (req, res) => {

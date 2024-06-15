@@ -1,4 +1,3 @@
-// controllers/serviceOrdersController.js
 const pool = require('../db');
 
 exports.getServiceOrders = async (req, res) => {

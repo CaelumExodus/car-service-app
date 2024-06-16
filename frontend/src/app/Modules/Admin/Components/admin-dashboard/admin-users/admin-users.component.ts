@@ -12,6 +12,7 @@ import cloneDeep from 'lodash/cloneDeep';
 export class AdminUsersComponent implements OnInit {
 
   public isLoading: boolean = false;
+  public disableIcons: boolean = false;
   public users: User[] = [];
   public selectedUser?: User;
 
@@ -30,6 +31,23 @@ export class AdminUsersComponent implements OnInit {
     if (dataChanged) {
       this.fetchUsers();
     }
+  }
+
+  deleteUser(id: number): void {
+    if (this.disableIcons) return
+
+    this.disableIcons = true
+
+
+    this.http.delete(`http://localhost:3000/users/${id}`)
+      .pipe(finalize(() => {
+        this.fetchUsers();
+        this.disableIcons = false
+      }))
+      .subscribe(
+        () => {},
+        error => console.error('Error deleting user:', error)
+      );
   }
 
   fetchUsers(): void {

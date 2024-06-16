@@ -1,56 +1,150 @@
 const pool = require('../db');
 
+// Function to get all service orders
 exports.getServiceOrders = async (req, res) => {
     try {
-        const data = await pool.query('SELECT * FROM serviceorders');
-        res.status(200).send(data.rows);
+        const query = 'SELECT * FROM serviceorders';
+        const { rows } = await pool.query(query);
+        res.status(200).json(rows);
     } catch (err) {
-        console.log(err);
+        console.error('Error fetching service orders:', err);
         res.sendStatus(500);
     }
 };
 
+// Function to get service orders by client ID
 exports.getServiceOrdersByClientId = async (req, res) => {
     const { clientId } = req.params;
     try {
-        const data = await pool.query('SELECT * FROM serviceorders WHERE clientid = $1', [clientId]);
-        res.status(200).send(data.rows);
+        const query = 'SELECT * FROM serviceorders WHERE clientid = $1';
+        const { rows } = await pool.query(query, [clientId]);
+        res.status(200).json(rows);
     } catch (err) {
-        console.error(err);
+        console.error('Error fetching service orders by client ID:', err);
         res.sendStatus(500);
     }
 };
 
-exports.createServiceOrder = async (req, res) => {
-    const { clientid, status, totalcost } = req.body;
+exports.getServiceOrdersWithServicesByClient = async (req, res) => {
+    const { clientId } = req.params;
+
     try {
-        await pool.query('INSERT INTO serviceorders (clientid, status, totalcost) VALUES ($1, $2, $3)', [clientid, status, totalcost]);
-        res.status(200).send({ message: 'Service order created successfully' });
+        const query = `
+            SELECT so.orderid, so.clientid, so.status, so.totalcost, so.createddate, so.completeddate,
+                sod.orderdetailid, sod.serviceid,
+                s.servicename, s.description, s.price
+            FROM serviceorders so
+            INNER JOIN serviceorderdetails sod ON so.orderid = sod.orderid
+            INNER JOIN services s ON sod.serviceid = s.serviceid
+            WHERE so.clientid = $1
+        `;
+
+        const { rows } = await pool.query(query, [clientId]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'No service orders found for the specified client' });
+        }
+
+        // Grouping service orders with their services
+        const serviceOrdersWithServices = {};
+        rows.forEach(row => {
+            const orderId = row.orderid;
+            if (!serviceOrdersWithServices[orderId]) {
+                serviceOrdersWithServices[orderId] = {
+                    orderId: row.orderid,
+                    clientId: row.clientid,
+                    status: row.status,
+                    totalCost: row.totalcost,
+                    createdDate: row.createddate,
+                    completedDate: row.completeddate,
+                    services: [],
+                };
+            }
+            // Add service details to services array
+            serviceOrdersWithServices[orderId].services.push({
+                serviceId: row.serviceid,
+                serviceName: row.servicename,
+                description: row.description,
+                price: row.price,
+            });
+        });
+
+        // Convert object to array of service orders
+        const serviceOrdersArray = Object.values(serviceOrdersWithServices);
+
+        res.status(200).json(serviceOrdersArray);
     } catch (err) {
-        console.log(err);
-        res.sendStatus(500);
+        console.error('Error fetching service orders with services:', err);
+        res.status(500).json({ error: 'Failed to fetch service orders with services' });
     }
 };
 
+
+// Function to create a new service order
+exports.createServiceOrder = async (req, res) => {
+    const { clientid, status, totalcost, serviceOrderDetails } = req.body;
+
+    try {
+        // Start a transaction to ensure all queries are atomic
+        const client = await pool.connect();
+        await client.query('BEGIN');
+
+        // Insert into serviceorders table
+        const insertOrderQuery = 'INSERT INTO serviceorders (clientid, status, totalcost) VALUES ($1, $2, $3) RETURNING orderid';
+        const orderValues = [clientid, status, totalcost];
+        const orderResult = await client.query(insertOrderQuery, orderValues);
+        const orderId = orderResult.rows[0].orderid;
+
+        // Prepare the query for inserting into serviceorderdetails table
+        const insertDetailsQuery = 'INSERT INTO serviceorderdetails (orderid, serviceid) VALUES ($1, $2)';
+
+        // Insert each service detail into serviceorderdetails
+        for (const detail of serviceOrderDetails) {
+            const detailValues = [orderId, detail.serviceId];
+            await client.query(insertDetailsQuery, detailValues);
+        }
+
+        // Commit the transaction
+        await client.query('COMMIT');
+        client.release();
+
+        res.status(201).json({ message: 'Service order created successfully' });
+    } catch (err) {
+        // Rollback the transaction in case of any error
+        await client.query('ROLLBACK');
+        client.release();
+
+        console.error('Error creating service order:', err);
+        res.status(500).json({ error: 'Failed to create service order' });
+    }
+};
+
+// Function to update an existing service order
 exports.updateServiceOrder = async (req, res) => {
     const { id } = req.params;
     const { clientid, status, totalcost } = req.body;
     try {
-        await pool.query('UPDATE serviceorders SET clientid = $1, status = $2, totalcost = $3 WHERE orderid = $4', [clientid, status, totalcost, id]);
-        res.status(200).send({ message: 'Service order updated successfully' });
+        const query = 'UPDATE serviceorders SET clientid = $1, status = $2, totalcost = $3 WHERE orderid = $4';
+        await pool.query(query, [clientid, status, totalcost, id]);
+        res.status(200).json({ message: 'Service order updated successfully' });
     } catch (err) {
-        console.log(err);
+        console.error('Error updating service order:', err);
         res.sendStatus(500);
     }
 };
 
+// Function to delete a service order
 exports.deleteServiceOrder = async (req, res) => {
     const { id } = req.params;
     try {
-        await pool.query('DELETE FROM serviceorders WHERE orderid = $1', [id]);
-        res.status(200).send({ message: 'Service order deleted successfully' });
+        const query = 'DELETE FROM serviceorders WHERE orderid = $1';
+        await pool.query(query, [id]);
+        res.status(200).json({ message: 'Service order deleted successfully' });
     } catch (err) {
-        console.log(err);
+        console.error('Error deleting service order:', err);
         res.sendStatus(500);
     }
 };
+
+
+

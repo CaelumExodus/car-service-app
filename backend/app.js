@@ -31,7 +31,8 @@ app.delete('/services/:id', servicesController.deleteService);
 
 // Routes for service orders
 app.get('/service-orders', serviceOrdersController.getServiceOrders);
-app.get('/service-orders/:clientId', serviceOrdersController.getServiceOrdersByClientId);
+app.get('/service-orders/client/:clientId', serviceOrdersController.getServiceOrdersByClientId);
+app.get('/service-orders/with-services/client/:clientId', serviceOrdersController.getServiceOrdersWithServicesByClient);
 app.post('/service-orders', serviceOrdersController.createServiceOrder);
 app.put('/service-orders/:id', serviceOrdersController.updateServiceOrder);
 app.delete('/service-orders/:id', serviceOrdersController.deleteServiceOrder);

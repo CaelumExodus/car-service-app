@@ -26,6 +26,13 @@ CREATE TABLE ServiceOrders (
     CompletedDate TIMESTAMP
 );
 
+-- Tworzenie tabeli ServiceOrderDetails
+CREATE TABLE ServiceOrderDetails (
+    OrderDetailID SERIAL PRIMARY KEY,
+    OrderID INT REFERENCES ServiceOrders(OrderID) ON DELETE CASCADE,
+    ServiceID INT REFERENCES Services(serviceid) ON DELETE CASCADE
+);
+
 -- Tworzenie tabeli Parts
 CREATE TABLE Parts (
     PartID SERIAL PRIMARY KEY,
@@ -66,53 +73,41 @@ CREATE TABLE ServiceOrderParts (
     PRIMARY KEY (OrderID, PartID)
 );
 
--- Dodawanie użytkowników
-INSERT INTO Users (Username, Password, Email, PhoneNumber, Role) VALUES
-('LClient', 'PClient', 'jan.kowalski@example.com', '123456789', 'client'),
-('LClient2', 'PClient2', 'jan.kowalski2@example.com', '123456789', 'client'),
-('LService', 'PService', 'anna.nowak@example.com', '987654321', 'service'),
-('LWarehouse', 'PWarehouse', 'piotr.wisniewski@example.com', '123123123', 'warehouse'),
-('LAdmin', 'PAdmin', 'admin@example.com', '321321321', 'admin');
+INSERT INTO Users (Username, Password, Email, PhoneNumber, Role)
+VALUES
+    ('admin', 'admin', 'admin@email.com', '+1234567890', 'admin'),
+    ('client', 'client', 'client@email.com', '+1987654321', 'client'),
+    ('warehouse', 'warehouse', 'warehouse@email.com', NULL, 'warehouse'),
+    ('service', 'service', 'service@email.com', NULL, 'service');
 
--- Dodawanie części
-INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier) VALUES
-('Olej silnikowy', 'Płyny', 50, 100.00, 'Dostawca A'),
-('Filtr powietrza', 'Filtry', 30, 50.00, 'Dostawca B'),
-('Świeca zapłonowa', 'Świece', 100, 20.00, 'Dostawca C'),
-('Klocki hamulcowe', 'Hamulce', 40, 150.00, 'Dostawca D'),
-('Akumulator', 'Elektryka', 20, 300.00, 'Dostawca E');
+INSERT INTO Services (serviceName, description, price)
+VALUES
+    ('Basic Cleaning', 'General cleaning service', 50.00),
+    ('Deep Cleaning', 'Thorough cleaning including hard-to-reach areas', 100.00),
+    ('Repair Services', 'Repairing various household items', 80.00);
 
--- Dodawanie usług serwisowych
-INSERT INTO Services (ServiceName, Description, Price) VALUES
-('Wymiana oleju silnikowego', 'Zmiana oleju w silniku pojazdu.', 100.00),
-('Wymiana filtrów', 'Wymiana filtrów powietrza i oleju.', 80.00),
-('Wymiana świec zapłonowych', 'Wymiana świec zapłonowych w silniku.', 50.00),
-('Wymiana klocków hamulcowych', 'Wymiana klocków hamulcowych w układzie hamulcowym.', 120.00),
-('Wymiana akumulatora', 'Wymiana akumulatora samochodowego.', 200.00);
+INSERT INTO ServiceOrders (ClientID, Status, TotalCost, CreatedDate, CompletedDate)
+VALUES
+    (1, 'Pending', NULL, '2024-06-15 10:00:00', NULL),
+    (2, 'Completed', 150.00, '2024-06-14 15:30:00', '2024-06-14 17:45:00');
 
+INSERT INTO ServiceOrderDetails (OrderID, ServiceID)
+VALUES
+    (1, 1),
+    (1, 3),
+    (2, 2);
 
--- Dodawanie zleceń serwisowych
-INSERT INTO ServiceOrders (ClientID, Status, TotalCost) VALUES
-(1, 'Nowe', 150.00),
-(2, 'W trakcie', 300.00),
-(1, 'Zakończone', 200.00);
+INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier)
+VALUES
+    ('Screwdriver', 'Tools', 50, 5.00, 'Tool Suppliers Inc.'),
+    ('Cleaning Solution', 'Cleaning Supplies', 100, 8.00, 'Cleaning Solutions LLC');
 
--- Dodawanie faktur
-INSERT INTO Invoices (OrderID, ClientID, Amount, DueDate, Status) VALUES
-(1, 1, 150.00, '2024-06-30', 'Wystawiona'),
-(2, 1, 300.00, '2024-07-15', 'Opłacona'),
-(3, 1, 200.00, '2024-07-01', 'Anulowana');
+INSERT INTO Invoices (OrderID, ClientID, Amount, IssueDate, DueDate, Status)
+VALUES
+    (1, 1, 50.00, '2024-06-15', '2024-06-30', 'Pending'),
+    (2, 2, 150.00, '2024-06-14', '2024-06-29', 'Paid');
 
--- Dodawanie reklamacji
-INSERT INTO Complaints (OrderID, ClientID, Description, Status) VALUES
-(1, 1, 'Problem z jakością usługi.', 'Rozwiązana'),
-(2, 1, 'Niezadowalający czas realizacji.', 'W trakcie'),
-(3, 1, 'Nieprawidłowa faktura.', 'Nowa');
-
--- Przypisywanie części do zleceń serwisowych
-INSERT INTO ServiceOrderParts (OrderID, PartID, Quantity) VALUES
-(1, 1, 2),
-(1, 2, 1),
-(2, 3, 4),
-(2, 4, 1),
-(3, 5, 1);
+INSERT INTO Complaints (OrderID, ClientID, Description, Status, CreatedDate, ResolvedDate)
+VALUES
+    (1, 1, 'Service not completed as expected.', 'Open', '2024-06-15 11:30:00', NULL),
+    (2, 2, 'Part of the service was not satisfactory.', 'Resolved', '2024-06-14 18:00:00', '2024-06-15 09:00:00');

@@ -10,6 +10,7 @@ import { AdminDashboardComponent } from './Modules/Admin/Components/admin-dashbo
 import { AdminUsersComponent } from './Modules/Admin/Components/admin-dashboard/admin-users/admin-users.component';
 import { TableWrapperComponent } from './Modules/Shared/Components/table-wrapper/table-wrapper.component';
 import { AdminServiceOrdersComponent } from './Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component';
+import { AdminPartsComponent } from './Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminServiceOrdersComponent } from './Modules/Admin/Components/admin-da
     AdminDashboardComponent,
     AdminUsersComponent,
     TableWrapperComponent,
-    AdminServiceOrdersComponent
+    AdminServiceOrdersComponent,
+    AdminPartsComponent
   ],
   imports: [
     BrowserModule,

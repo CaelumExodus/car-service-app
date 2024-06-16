@@ -29,7 +29,7 @@ export class AdminServiceOrdersComponent implements OnInit {
           this.serviceOrders = serviceOrders;
         },
         error => {
-          console.error('Error fetching users:', error);
+          console.error('Error fetching service orders:', error);
         }
       );
   }

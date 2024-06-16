@@ -1,0 +1,22 @@
+<app-table-wrapper [loading]="isLoading">
+  <ng-container table-header>
+    <tr>
+      <th class="py-3 px-6 text-left">Part ID</th>
+      <th class="py-3 px-6 text-left">Name</th>
+      <th class="py-3 px-6 text-left">Category</th>
+      <th class="py-3 px-6 text-left">Quantity</th>
+      <th class="py-3 px-6 text-left">Unit price</th>
+      <th class="py-3 px-6 text-left">Supplier</th>
+    </tr>
+  </ng-container>
+  <ng-container table-body>
+    <tr *ngFor="let part of parts">
+      <td class="py-3 px-6 text-left">{{ part.partid }}</td>
+      <td class="py-3 px-6 text-left">{{ part.partname }}</td>
+      <td class="py-3 px-6 text-left">{{ part.partcategory }}</td>
+      <td class="py-3 px-6 text-left">{{ part.quantityinstock}}</td>
+      <td class="py-3 px-6 text-left">{{ part.unitprice }}</td>
+      <td class="py-3 px-6 text-left">{{ part.supplier }}</td>
+    </tr>
+  </ng-container>
+</app-table-wrapper>

@@ -8,6 +8,7 @@ import { AdminUsersComponent } from "./Modules/Admin/Components/admin-dashboard/
 import {
   AdminServiceOrdersComponent
 } from "./Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component";
+import {AdminPartsComponent} from "./Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     children: [
       { path: 'users', component: AdminUsersComponent },
       { path: 'service-orders', component: AdminServiceOrdersComponent },
+      { path: 'parts', component: AdminPartsComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
     ]

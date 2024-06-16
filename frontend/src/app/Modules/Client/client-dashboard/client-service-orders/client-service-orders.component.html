@@ -1,12 +1,10 @@
-<button class="bg-transparent hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-black rounded-2xl shadow-md w-full mb-5 h-12">
+<button (click)="openAddModal()" class="bg-transparent hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-black rounded-2xl shadow-md w-full mb-5 h-12">
   Add service
 </button>
 
 <app-table-wrapper [loading]="isLoading">
   <ng-container table-header>
     <tr>
-      <th class="py-3 px-6 text-left">Order ID</th>
-      <th class="py-3 px-6 text-left">Client ID</th>
       <th class="py-3 px-6 text-left">Status</th>
       <th class="py-3 px-6 text-left">Total Cost</th>
       <th class="py-3 px-6 text-left">Created Date</th>
@@ -15,8 +13,6 @@
   </ng-container>
   <ng-container table-body>
     <tr *ngFor="let order of serviceOrders">
-      <td class="py-3 px-6 text-left">{{ order.orderid }}</td>
-      <td class="py-3 px-6 text-left">{{ order.clientid }}</td>
       <td class="py-3 px-6 text-left">{{ order.status }}</td>
       <td class="py-3 px-6 text-left">{{ order.totalcost }}</td>
       <td class="py-3 px-6 text-left">{{ order.createddate ? (order.createddate | date) : '-' }}</td>
@@ -24,3 +20,5 @@
     </tr>
   </ng-container>
 </app-table-wrapper>
+
+<app-client-add-service-order-modal *ngIf="showAddModal" (closeModal)="closeAddModal($event)"></app-client-add-service-order-modal>

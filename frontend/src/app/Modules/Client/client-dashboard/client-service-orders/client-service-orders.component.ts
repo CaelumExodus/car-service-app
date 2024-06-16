@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ServiceOrder } from "../../../../Models/Models";
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
@@ -13,11 +13,22 @@ export class ClientServiceOrdersComponent implements OnInit {
 
   public isLoading: boolean = false
   public serviceOrders: ServiceOrder[] = [];
+  public showAddModal: boolean = false;
 
   constructor(private http: HttpClient, private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     this.fetchUsers();
+  }
+
+  openAddModal(): void {
+    this.showAddModal = true;
+  }
+
+  closeAddModal(submitted: boolean): void {
+    this.showAddModal = false;
+
+    submitted && this.fetchUsers()
   }
 
   fetchUsers(): void {
@@ -27,7 +38,7 @@ export class ClientServiceOrdersComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.http.get<ServiceOrder[]>(`http://localhost:3000/service-orders/${userId}`)
+    this.http.get<ServiceOrder[]>(`http://localhost:3000/service-orders/with-services/client/${userId}`)
       .pipe(finalize((): boolean => this.isLoading = false))
       .subscribe(
         (serviceOrders: ServiceOrder[]): void => {

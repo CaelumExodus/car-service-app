@@ -51,19 +51,19 @@ exports.getServiceOrdersWithServicesByClient = async (req, res) => {
             const orderId = row.orderid;
             if (!serviceOrdersWithServices[orderId]) {
                 serviceOrdersWithServices[orderId] = {
-                    orderId: row.orderid,
-                    clientId: row.clientid,
+                    orderid: row.orderid,
+                    clientid: row.clientid,
                     status: row.status,
-                    totalCost: row.totalcost,
-                    createdDate: row.createddate,
-                    completedDate: row.completeddate,
+                    totalcost: row.totalcost,
+                    createddate: row.createddate,
+                    completeddate: row.completeddate,
                     services: [],
                 };
             }
             // Add service details to services array
             serviceOrdersWithServices[orderId].services.push({
-                serviceId: row.serviceid,
-                serviceName: row.servicename,
+                serviceid: row.serviceid,
+                servicename: row.servicename,
                 description: row.description,
                 price: row.price,
             });
@@ -82,7 +82,7 @@ exports.getServiceOrdersWithServicesByClient = async (req, res) => {
 
 // Function to create a new service order
 exports.createServiceOrder = async (req, res) => {
-    const { clientid, status, totalcost, serviceOrderDetails } = req.body;
+    const { clientid, status, totalcost, serviceorderdetails } = req.body;
 
     try {
         // Start a transaction to ensure all queries are atomic
@@ -99,7 +99,7 @@ exports.createServiceOrder = async (req, res) => {
         const insertDetailsQuery = 'INSERT INTO serviceorderdetails (orderid, serviceid) VALUES ($1, $2)';
 
         // Insert each service detail into serviceorderdetails
-        for (const detail of serviceOrderDetails) {
+        for (const detail of serviceorderdetails) {
             const detailValues = [orderId, detail.serviceId];
             await client.query(insertDetailsQuery, detailValues);
         }
@@ -119,7 +119,6 @@ exports.createServiceOrder = async (req, res) => {
     }
 };
 
-// Function to update an existing service order
 exports.updateServiceOrder = async (req, res) => {
     const { id } = req.params;
     const { clientid, status, totalcost } = req.body;
@@ -133,7 +132,6 @@ exports.updateServiceOrder = async (req, res) => {
     }
 };
 
-// Function to delete a service order
 exports.deleteServiceOrder = async (req, res) => {
     const { id } = req.params;
     try {

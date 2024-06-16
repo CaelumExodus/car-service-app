@@ -17,6 +17,7 @@ import { AdminEditUserModalComponent } from './Modules/Admin/Components/admin-da
 import { ClientDashboardComponent } from './Modules/Client/client-dashboard/client-dashboard.component';
 import { ClientServiceOrdersComponent } from './Modules/Client/client-dashboard/client-service-orders/client-service-orders.component';
 import { ClientComplaintsComponent } from './Modules/Client/client-dashboard/client-complaints/client-complaints.component';
+import { ClientAddServiceOrderModalComponent } from './Modules/Client/client-dashboard/client-service-orders/client-add-service-order-modal/client-add-service-order-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ClientComplaintsComponent } from './Modules/Client/client-dashboard/cli
     AdminEditUserModalComponent,
     ClientDashboardComponent,
     ClientServiceOrdersComponent,
-    ClientComplaintsComponent
+    ClientComplaintsComponent,
+    ClientAddServiceOrderModalComponent
   ],
   imports: [
     BrowserModule,

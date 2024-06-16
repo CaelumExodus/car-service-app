@@ -9,7 +9,7 @@ export interface User {
 
 export interface Service {
   serviceid: number;
-  serviceName: string;
+  servicename: string;
   description?: string;
   price: number;
 }
@@ -21,6 +21,7 @@ export interface ServiceOrder {
   totalcost?: number;
   createddate: Date;
   completeddate?: Date;
+  serviceorderdetails?: { serviceId: number };
 }
 
 export interface Part {
@@ -55,5 +56,4 @@ export interface Complaint {
 export interface Serviceorderpart {
   orderid: number;
   partid: number;
-  quantity: number;
 }

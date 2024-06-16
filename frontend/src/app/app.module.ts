@@ -13,6 +13,7 @@ import { AdminServiceOrdersComponent } from './Modules/Admin/Components/admin-da
 import { AdminPartsComponent } from './Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component';
 import { AdminInvoicesComponent } from './Modules/Admin/Components/admin-dashboard/admin-invoices/admin-invoices.component';
 import { AdminComplaintsComponent } from './Modules/Admin/Components/admin-dashboard/admin-complaints/admin-complaints.component';
+import { AdminEditUserModalComponent } from './Modules/Admin/Components/admin-dashboard/admin-users/admin-edit-user-modal/admin-edit-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminComplaintsComponent } from './Modules/Admin/Components/admin-dashb
     AdminServiceOrdersComponent,
     AdminPartsComponent,
     AdminInvoicesComponent,
-    AdminComplaintsComponent
+    AdminComplaintsComponent,
+    AdminEditUserModalComponent
   ],
   imports: [
     BrowserModule,

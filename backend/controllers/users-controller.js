@@ -11,9 +11,9 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-    const { username, password, email, phoneNumber, role } = req.body;
+    const { username, password, email, phonenumber, role } = req.body;
     try {
-        await pool.query('INSERT INTO users (username, password, email, phoneNumber, role) VALUES ($1, $2, $3, $4, $5)', [username, password, email, phoneNumber, role]);
+        await pool.query('INSERT INTO users (username, password, email, phoneNumber, role) VALUES ($1, $2, $3, $4, $5)', [username, password, email, phonenumber, role]);
         res.status(200).send({ message: 'User created successfully' });
     } catch (err) {
         console.log(err);
@@ -23,9 +23,9 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     const { id } = req.params;
-    const { username, password, email, phoneNumber, role } = req.body;
+    const { username, password, email, phonenumber, role } = req.body;
     try {
-        await pool.query('UPDATE users SET username = $1, password = $2, email = $3, phoneNumber = $4, role = $5 WHERE userid = $6', [username, password, email, phoneNumber, role, id]);
+        await pool.query('UPDATE users SET username = $1, password = $2, email = $3, phoneNumber = $4, role = $5 WHERE userid = $6', [username, password, email, phonenumber, role, id]);
         res.status(200).send({ message: 'User updated successfully' });
     } catch (err) {
         console.log(err);

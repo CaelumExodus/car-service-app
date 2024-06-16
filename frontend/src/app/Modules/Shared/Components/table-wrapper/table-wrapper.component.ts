@@ -5,10 +5,10 @@ import { Component, Input } from '@angular/core';
   template: `
 		<div class="overflow-x-auto">
 			<table class="min-w-full bg-white rounded-lg overflow-hidden">
-				<thead class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+				<thead class="bg-gray-700 text-white uppercase text-sm leading-normal">
 				<ng-content select="[table-header]"></ng-content>
 				</thead>
-				<tbody class="text-gray-600 text-sm font-light">
+				<tbody class="text-gray-600 bg-gray-300 text-sm">
 				<ng-container *ngIf="loading; else tableContent">
 					<tr>
 						<td colspan="5" class="py-10 px-6 text-center">

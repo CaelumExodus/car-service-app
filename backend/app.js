@@ -24,6 +24,7 @@ app.post('/users/login', usersController.loginUser);
 
 // Routes for service orders
 app.get('/service-orders', serviceOrdersController.getServiceOrders);
+app.get('/service-orders/:clientId', serviceOrdersController.getServiceOrdersByClientId);
 app.post('/service-orders', serviceOrdersController.createServiceOrder);
 app.put('/service-orders/:id', serviceOrdersController.updateServiceOrder);
 app.delete('/service-orders/:id', serviceOrdersController.deleteServiceOrder);

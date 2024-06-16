@@ -61,6 +61,7 @@ CREATE TABLE ServiceOrderParts (
 -- Dodawanie użytkowników
 INSERT INTO Users (Username, Password, Email, PhoneNumber, Role) VALUES
 ('LClient', 'PClient', 'jan.kowalski@example.com', '123456789', 'client'),
+('LClient2', 'PClient2', 'jan.kowalski2@example.com', '123456789', 'client'),
 ('LService', 'PService', 'anna.nowak@example.com', '987654321', 'service'),
 ('LWarehouse', 'PWarehouse', 'piotr.wisniewski@example.com', '123123123', 'warehouse'),
 ('LAdmin', 'PAdmin', 'admin@example.com', '321321321', 'admin');
@@ -76,7 +77,7 @@ INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier)
 -- Dodawanie zleceń serwisowych
 INSERT INTO ServiceOrders (ClientID, Status, TotalCost) VALUES
 (1, 'Nowe', 150.00),
-(1, 'W trakcie', 300.00),
+(2, 'W trakcie', 300.00),
 (1, 'Zakończone', 200.00);
 
 -- Dodawanie faktur

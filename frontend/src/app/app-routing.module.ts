@@ -15,6 +15,10 @@ import {
 import {
   AdminComplaintsComponent
 } from "./Modules/Admin/Components/admin-dashboard/admin-complaints/admin-complaints.component";
+import { ClientDashboardComponent } from "./Modules/Client/client-dashboard/client-dashboard.component";
+import {
+  ClientServiceOrdersComponent
+} from "./Modules/Client/client-dashboard/client-service-orders/client-service-orders.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -30,8 +34,19 @@ const routes: Routes = [
       { path: 'parts', component: AdminPartsComponent },
       { path: 'invoices', component: AdminInvoicesComponent },
       { path: 'complaints', component: AdminComplaintsComponent },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: '**', redirectTo: 'dashboard' }
+      { path: '', redirectTo: 'users', pathMatch: 'full' },
+      { path: '**', redirectTo: 'users' }
+    ]
+  },
+  {
+    path: 'client',
+    component: ClientDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'client' },
+    children: [
+      { path: 'service-orders', component: ClientServiceOrdersComponent },
+      { path: '', redirectTo: 'service-orders', pathMatch: 'full' },
+      { path: '**', redirectTo: 'service-orders' }
     ]
   },
 ];

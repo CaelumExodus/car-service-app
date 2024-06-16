@@ -10,6 +10,17 @@ exports.getServiceOrders = async (req, res) => {
     }
 };
 
+exports.getServiceOrdersByClientId = async (req, res) => {
+    const { clientId } = req.params;
+    try {
+        const data = await pool.query('SELECT * FROM serviceorders WHERE clientid = $1', [clientId]);
+        res.status(200).send(data.rows);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+};
+
 exports.createServiceOrder = async (req, res) => {
     const { clientid, status, totalcost } = req.body;
     try {

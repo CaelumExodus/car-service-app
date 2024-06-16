@@ -12,6 +12,7 @@ import { TableWrapperComponent } from './Modules/Shared/Components/table-wrapper
 import { AdminServiceOrdersComponent } from './Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component';
 import { AdminPartsComponent } from './Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component';
 import { AdminInvoicesComponent } from './Modules/Admin/Components/admin-dashboard/admin-invoices/admin-invoices.component';
+import { AdminComplaintsComponent } from './Modules/Admin/Components/admin-dashboard/admin-complaints/admin-complaints.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AdminInvoicesComponent } from './Modules/Admin/Components/admin-dashboa
     TableWrapperComponent,
     AdminServiceOrdersComponent,
     AdminPartsComponent,
-    AdminInvoicesComponent
+    AdminInvoicesComponent,
+    AdminComplaintsComponent
   ],
   imports: [
     BrowserModule,

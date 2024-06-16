@@ -1,6 +1,7 @@
 const express = require('express');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors');
 const usersController = require('./controllers/users-controller');
+const servicesController = require('./controllers/services-controller');
 const serviceOrdersController = require('./controllers/service-orders-controller');
 const partsController = require('./controllers/parts-controller');
 const invoicesController = require('./controllers/invoices-controller');
@@ -21,6 +22,12 @@ app.post('/users', usersController.createUser);
 app.put('/users/:id', usersController.updateUser);
 app.delete('/users/:id', usersController.deleteUser);
 app.post('/users/login', usersController.loginUser);
+
+// Routes for services
+app.get('/services', servicesController.getServices);
+app.post('/services', servicesController.createService);
+app.put('/services/:id', servicesController.updateService);
+app.delete('/services/:id', servicesController.deleteService);
 
 // Routes for service orders
 app.get('/service-orders', serviceOrdersController.getServiceOrders);

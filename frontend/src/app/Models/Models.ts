@@ -7,6 +7,13 @@ export interface User {
   role: string;
 }
 
+export interface Service {
+  serviceid: number;
+  serviceName: string;
+  description?: string;
+  price: number;
+}
+
 export interface ServiceOrder {
   orderid: number;
   clientid: number;

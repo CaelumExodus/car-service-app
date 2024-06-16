@@ -8,6 +8,14 @@ CREATE TABLE Users (
     Role VARCHAR(20) NOT NULL
 );
 
+-- Tworzenie tabeli Service
+CREATE TABLE service (
+  serviceid SERIAL PRIMARY KEY,
+  serviceName VARCHAR(100) NOT NULL,
+  description TEXT,
+  price NUMERIC(10, 2) NOT NULL
+);
+
 -- Tworzenie tabeli ServiceOrders
 CREATE TABLE ServiceOrders (
     OrderID SERIAL PRIMARY KEY,
@@ -73,6 +81,15 @@ INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier)
 ('Świeca zapłonowa', 'Świece', 100, 20.00, 'Dostawca C'),
 ('Klocki hamulcowe', 'Hamulce', 40, 150.00, 'Dostawca D'),
 ('Akumulator', 'Elektryka', 20, 300.00, 'Dostawca E');
+
+-- Dodawanie usług serwisowych
+INSERT INTO Services (ServiceName, Description, Price) VALUES
+('Wymiana oleju silnikowego', 'Zmiana oleju w silniku pojazdu.', 100.00),
+('Wymiana filtrów', 'Wymiana filtrów powietrza i oleju.', 80.00),
+('Wymiana świec zapłonowych', 'Wymiana świec zapłonowych w silniku.', 50.00),
+('Wymiana klocków hamulcowych', 'Wymiana klocków hamulcowych w układzie hamulcowym.', 120.00),
+('Wymiana akumulatora', 'Wymiana akumulatora samochodowego.', 200.00);
+
 
 -- Dodawanie zleceń serwisowych
 INSERT INTO ServiceOrders (ClientID, Status, TotalCost) VALUES

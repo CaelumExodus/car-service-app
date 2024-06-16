@@ -43,6 +43,7 @@ app.delete('/invoices/:id', invoicesController.deleteInvoice);
 
 // Routes for complaints
 app.get('/complaints', complaintsController.getComplaints);
+app.get('/complaints/:clientId', complaintsController.getComplaints);
 app.post('/complaints', complaintsController.createComplaint);
 app.put('/complaints/:id', complaintsController.updateComplaint);
 app.delete('/complaints/:id', complaintsController.deleteComplaint);

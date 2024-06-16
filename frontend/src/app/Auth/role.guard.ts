@@ -13,8 +13,16 @@ export class RoleGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const expectedRole = route.data['expectedRole'];
 
-    if (this.authService.isLoggedIn() && this.authService.getUserRole() === expectedRole) {
+    const isLoggedIn: boolean = this.authService.isLoggedIn();
+    const userRole: string | undefined = this.authService.getUserRole();
+
+
+    if (isLoggedIn && userRole === expectedRole) {
       return true;
+    }
+
+    if (isLoggedIn && userRole !== expectedRole) {
+      return this.router.parseUrl(`/${userRole}`)
     }
 
     return this.router.parseUrl('/login');

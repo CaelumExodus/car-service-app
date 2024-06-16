@@ -1,0 +1,24 @@
+<app-table-wrapper [loading]="isLoading">
+  <ng-container table-header>
+    <tr>
+      <th class="py-3 px-6 text-left">Complaint ID</th>
+      <th class="py-3 px-6 text-left">Order ID</th>
+      <th class="py-3 px-6 text-left">Client ID</th>
+      <th class="py-3 px-6 text-left">Description</th>
+      <th class="py-3 px-6 text-left">Status</th>
+      <th class="py-3 px-6 text-left">Create date</th>
+      <th class="py-3 px-6 text-left">Resolve date</th>
+    </tr>
+  </ng-container>
+  <ng-container table-body>
+    <tr *ngFor="let complaint of complaints">
+      <td class="py-3 px-6 text-left">{{ complaint.complaintid }}</td>
+      <td class="py-3 px-6 text-left">{{ complaint.orderid }}</td>
+      <td class="py-3 px-6 text-left">{{ complaint.clientid }}</td>
+      <td class="py-3 px-6 text-left">{{ complaint.description }}</td>
+      <td class="py-3 px-6 text-left">{{ complaint.status }}</td>
+      <td class="py-3 px-6 text-left">{{ complaint.createddate ? (complaint.createddate | date) : '-' }}</td>
+      <td class="py-3 px-6 text-left">{{ complaint.resolveddate ? (complaint.resolveddate | date) : '-' }}</td>
+    </tr>
+  </ng-container>
+</app-table-wrapper>

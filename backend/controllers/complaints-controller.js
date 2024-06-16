@@ -10,6 +10,18 @@ exports.getComplaints = async (req, res) => {
     }
 };
 
+exports.getComplaintsByClientId = async (req, res) => {
+    const { clientId } = req.params;
+
+    try {
+        const data = await pool.query('SELECT * FROM complaints WHERE clientid = $1', [clientId]);
+        res.status(200).send(data.rows);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+};
+
 exports.createComplaint = async (req, res) => {
     const { orderid, clientid, description, status } = req.body;
     try {

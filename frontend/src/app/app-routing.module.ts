@@ -19,6 +19,9 @@ import { ClientDashboardComponent } from "./Modules/Client/client-dashboard/clie
 import {
   ClientServiceOrdersComponent
 } from "./Modules/Client/client-dashboard/client-service-orders/client-service-orders.component";
+import {
+  ClientComplaintsComponent
+} from "./Modules/Client/client-dashboard/client-complaints/client-complaints.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -45,8 +48,9 @@ const routes: Routes = [
     data: { expectedRole: 'client' },
     children: [
       { path: 'service-orders', component: ClientServiceOrdersComponent },
+      { path: 'complaints', component: ClientComplaintsComponent },
       { path: '', redirectTo: 'service-orders', pathMatch: 'full' },
-      { path: '**', redirectTo: 'service-orders' }
+      { path: '**', redirectTo: 'service-orders', pathMatch: 'full'}
     ]
   },
 ];

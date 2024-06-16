@@ -9,6 +9,9 @@ import {
   AdminServiceOrdersComponent
 } from "./Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component";
 import {AdminPartsComponent} from "./Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component";
+import {
+  AdminInvoicesComponent
+} from "./Modules/Admin/Components/admin-dashboard/admin-invoices/admin-invoices.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -22,6 +25,7 @@ const routes: Routes = [
       { path: 'users', component: AdminUsersComponent },
       { path: 'service-orders', component: AdminServiceOrdersComponent },
       { path: 'parts', component: AdminPartsComponent },
+      { path: 'invoices', component: AdminInvoicesComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
     ]

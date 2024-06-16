@@ -9,7 +9,7 @@ CREATE TABLE Users (
 );
 
 -- Tworzenie tabeli Service
-CREATE TABLE service (
+CREATE TABLE Services (
   serviceid SERIAL PRIMARY KEY,
   serviceName VARCHAR(100) NOT NULL,
   description TEXT,

@@ -1,5 +1,5 @@
 import { Component, OnInit  } from '@angular/core';
-import { ServiceOrder } from "../../../../Models/Models";
+import { Service, ServiceOrder } from "../../../../Models/Models";
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
 import { AuthService } from "../../../../Auth/auth.service";
@@ -29,6 +29,12 @@ export class ClientServiceOrdersComponent implements OnInit {
     this.showAddModal = false;
 
     submitted && this.fetchUsers()
+  }
+
+  getServicesNameFromDetailsToString(order: ServiceOrder): string | undefined {
+    const serviceNameArray: string[] | undefined = order.services?.map((service: Service) => service.servicename)
+
+    return serviceNameArray?.join(' | ');
   }
 
   fetchUsers(): void {

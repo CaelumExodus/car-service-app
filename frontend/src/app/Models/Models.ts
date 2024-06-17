@@ -21,7 +21,7 @@ export interface ServiceOrder {
   totalcost?: number;
   createddate: Date;
   completeddate?: Date;
-  serviceorderdetails?: { serviceId: number };
+  services?: Service[];
 }
 
 export interface Part {

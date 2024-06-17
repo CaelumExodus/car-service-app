@@ -11,9 +11,9 @@
           </svg>
         </button>
       </div>
-      <div class="p-6 space-y-6 flex">
+      <div class="p-6 space-y-6 flex flex-col">
 
-        <div class="container mx-auto p-4 flex flex-col gap-7">
+        <div class="container mx-auto flex flex-col gap-7">
           <div *ngFor="let service of services" (click)="onServiceClick(service)" class="cursor-pointer p-4 rounded shadow hover:bg-gray-400" [ngClass]="{'bg-gray-400': selectedServices.includes(service), 'bg-white': !selectedServices.includes(service)}">
             <h2 class="text-lg font-bold">{{ service.servicename }}</h2>
             <p class="text-gray-600">{{ service.description }}</p>
@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <button (click)="postNewServiceOrder()">BUTTon</button>
+        <button class="bg-white hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-black rounded-2xl shadow-md w-full mb-5 h-12" (click)="postNewServiceOrder()">Order services</button>
 
       </div>
     </div>

@@ -1,6 +1,8 @@
 <app-table-wrapper [loading]="isLoading">
   <ng-container table-header>
     <tr>
+      <th class="py-3 px-6 text-left">Order ID</th>
+      <th class="py-3 px-6 text-left">Client ID</th>
       <th class="py-3 px-6 text-left">Status</th>
       <th class="py-3 px-6 text-left">Total Cost</th>
       <th class="py-3 px-6 text-left">services</th>
@@ -10,6 +12,8 @@
   </ng-container>
   <ng-container table-body>
     <tr *ngFor="let order of serviceOrders">
+      <td class="py-3 px-6 text-left">{{ order.orderid }}</td>
+      <td class="py-3 px-6 text-left">{{ order.clientid }}</td>
       <td class="py-3 px-6 text-left">{{ order.status }}</td>
       <td class="py-3 px-6 text-left">{{ order.totalcost }}</td>
       <td class="py-3 px-6 text-left">{{ getServicesNameFromDetailsToString(order) ?? '' }}</td>

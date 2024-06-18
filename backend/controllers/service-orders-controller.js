@@ -1,6 +1,5 @@
 const pool = require('../db');
 
-// Function to get all service orders
 exports.getServiceOrders = async (req, res) => {
     try {
         const query = 'SELECT * FROM serviceorders';
@@ -12,7 +11,6 @@ exports.getServiceOrders = async (req, res) => {
     }
 };
 
-// Function to get service orders by client ID
 exports.getServiceOrdersByClientId = async (req, res) => {
     const { clientId } = req.params;
     try {
@@ -78,6 +76,58 @@ exports.getServiceOrdersWithServicesByClient = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch service orders with services' });
     }
 };
+
+exports.getAllServiceOrdersWithServices = async (req, res) => {
+    try {
+        const query = `
+            SELECT so.orderid, so.clientid, so.status, so.totalcost, so.createddate, so.completeddate,
+                sod.orderdetailid, sod.serviceid,
+                s.servicename, s.description, s.price
+            FROM serviceorders so
+            INNER JOIN serviceorderdetails sod ON so.orderid = sod.orderid
+            INNER JOIN services s ON sod.serviceid = s.serviceid
+        `;
+
+        const { rows } = await pool.query(query);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'No service orders found' });
+        }
+
+        // Grouping service orders with their services
+        const serviceOrdersWithServices = {};
+        rows.forEach(row => {
+            const orderId = row.orderid;
+            if (!serviceOrdersWithServices[orderId]) {
+                serviceOrdersWithServices[orderId] = {
+                    orderid: row.orderid,
+                    clientid: row.clientid,
+                    status: row.status,
+                    totalcost: row.totalcost,
+                    createddate: row.createddate,
+                    completeddate: row.completeddate,
+                    services: [],
+                };
+            }
+            // Add service details to services array
+            serviceOrdersWithServices[orderId].services.push({
+                serviceid: row.serviceid,
+                servicename: row.servicename,
+                description: row.description,
+                price: row.price,
+            });
+        });
+
+        // Convert object to array of service orders
+        const serviceOrdersArray = Object.values(serviceOrdersWithServices);
+
+        res.status(200).json(serviceOrdersArray);
+    } catch (err) {
+        console.error('Error fetching service orders with services:', err);
+        res.status(500).json({ error: 'Failed to fetch service orders with services' });
+    }
+};
+
 
 
 // Function to create a new service order

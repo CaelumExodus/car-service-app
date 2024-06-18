@@ -33,6 +33,7 @@ app.delete('/services/:id', servicesController.deleteService);
 app.get('/service-orders', serviceOrdersController.getServiceOrders);
 app.get('/service-orders/client/:clientId', serviceOrdersController.getServiceOrdersByClientId);
 app.get('/service-orders/with-services/client/:clientId', serviceOrdersController.getServiceOrdersWithServicesByClient);
+app.get('/service-orders/with-services', serviceOrdersController.getAllServiceOrdersWithServices);
 app.post('/service-orders', serviceOrdersController.createServiceOrder);
 app.put('/service-orders/:id', serviceOrdersController.updateServiceOrder);
 app.delete('/service-orders/:id', serviceOrdersController.deleteServiceOrder);

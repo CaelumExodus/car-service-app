@@ -22,6 +22,11 @@ import {
 import {
   ClientComplaintsComponent
 } from "./Modules/Client/client-dashboard/client-complaints/client-complaints.component";
+import { ServiceDashboardComponent } from "./Modules/Service/service-dashboard/service-dashboard.component";
+import {
+  ServiceServiceOrdersComponent
+} from "./Modules/Service/service-dashboard/service-service-orders/service-service-orders.component";
+import { ServicePartsComponent } from "./Modules/Service/service-dashboard/service-parts/service-parts.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -49,6 +54,18 @@ const routes: Routes = [
     children: [
       { path: 'service-orders', component: ClientServiceOrdersComponent },
       { path: 'complaints', component: ClientComplaintsComponent },
+      { path: '', redirectTo: 'service-orders', pathMatch: 'full' },
+      { path: '**', redirectTo: 'service-orders', pathMatch: 'full'}
+    ]
+  },
+  {
+    path: 'service',
+    component: ServiceDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'service' },
+    children: [
+      { path: 'service-orders', component: ServiceServiceOrdersComponent },
+      { path: 'parts', component: ServicePartsComponent },
       { path: '', redirectTo: 'service-orders', pathMatch: 'full' },
       { path: '**', redirectTo: 'service-orders', pathMatch: 'full'}
     ]

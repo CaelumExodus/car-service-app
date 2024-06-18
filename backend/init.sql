@@ -88,14 +88,16 @@ VALUES
 
 INSERT INTO ServiceOrders (ClientID, Status, TotalCost, CreatedDate, CompletedDate)
 VALUES
-    (1, 'Pending', NULL, '2024-06-15 10:00:00', NULL),
-    (2, 'Completed', 150.00, '2024-06-14 15:30:00', '2024-06-14 17:45:00');
+    (1, 'pending', NULL, '2024-06-15 10:00:00', NULL),
+    (2, 'completed', 150.00, '2024-06-14 15:30:00', '2024-06-14 17:45:00'),
+    (3, 'pending', NULL, '2024-07-15 10:00:00', NULL);
 
 INSERT INTO ServiceOrderDetails (OrderID, ServiceID)
 VALUES
     (1, 1),
     (1, 3),
-    (2, 2);
+    (2, 2),
+    (3, 2);
 
 INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier)
 VALUES

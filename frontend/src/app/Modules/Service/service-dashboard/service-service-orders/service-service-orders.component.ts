@@ -12,6 +12,7 @@ export class ServiceServiceOrdersComponent implements OnInit{
 
   public isLoading: boolean = false
   public serviceOrders: ServiceOrder[] = [];
+  public disableButtons: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,19 @@ export class ServiceServiceOrdersComponent implements OnInit{
     const serviceNameArray: string[] | undefined = order.services?.map((service: Service) => service.servicename)
 
     return serviceNameArray?.join(' | ');
+  }
+
+  public changeServiceOrderStatus(order: ServiceOrder, status: string): void {
+    this.disableButtons = true;
+
+    order.status = status
+
+    this.http.put<ServiceOrder>(`http://localhost:3000/service-orders/${order.orderid}`, order)
+      .pipe(finalize(() => {
+        this.disableButtons = false
+        this.fetchServices();
+      }))
+      .subscribe()
   }
 
   fetchServices(): void {

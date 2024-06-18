@@ -8,17 +8,55 @@
       <th class="py-3 px-6 text-left">services</th>
       <th class="py-3 px-6 text-left">Created Date</th>
       <th class="py-3 px-6 text-left">Completed Date</th>
+      <th class="py-3 px-6 text-left">Change</th>
     </tr>
   </ng-container>
   <ng-container table-body>
     <tr *ngFor="let order of serviceOrders">
       <td class="py-3 px-6 text-left">{{ order.orderid }}</td>
       <td class="py-3 px-6 text-left">{{ order.clientid }}</td>
-      <td class="py-3 px-6 text-left">{{ order.status }}</td>
+      <td class="py-3 px-6 text-left">
+        <div
+          [ngClass]="{
+            'text-red-700': order.status === 'rejected',
+            'text-yellow-700': order.status === 'in progress',
+            'text-green-700': order.status === 'completed',
+           }"
+        >
+          {{ order.status }}
+        </div>
+      </td>
       <td class="py-3 px-6 text-left">{{ order.totalcost }}</td>
       <td class="py-3 px-6 text-left">{{ getServicesNameFromDetailsToString(order) ?? '' }}</td>
       <td class="py-3 px-6 text-left">{{ order.createddate ? (order.createddate | date) : '-' }}</td>
       <td class="py-3 px-6 text-left">{{ order.completeddate ? (order.completeddate | date) : '-' }}</td>
+      <td class="py-3 px-6 text-left flex gap-2">
+        <ng-container *ngIf="order.status === 'pending'">
+          <button
+            class="bg-yellow-600 text-white font-bold py-1 px-2 rounded text-xs flex"
+            (click)="changeServiceOrderStatus(order, 'in progress')"
+            [disabled]="disableButtons"
+          >
+            in progress
+          </button>
+          <button
+            class="bg-red-700 text-white font-bold py-1 px-2 rounded text-xs"
+            (click)="changeServiceOrderStatus(order, 'rejected')"
+            [disabled]="disableButtons"
+          >
+            reject
+          </button>
+        </ng-container>
+        <ng-container *ngIf="order.status === 'in progress'">
+          <button
+            class="bg-green-700 text-white font-bold py-1 px-2 rounded text-xs flex"
+            (click)="changeServiceOrderStatus(order, 'completed')"
+            [disabled]="disableButtons"
+          >
+            complete
+          </button>
+        </ng-container>
+      </td>
     </tr>
   </ng-container>
 </app-table-wrapper>

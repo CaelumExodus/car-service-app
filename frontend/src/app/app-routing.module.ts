@@ -31,6 +31,9 @@ import { WarehouseDashboardComponent } from "./Modules/Warehouse/warehouse-dashb
 import {
   WarehousePartsComponent
 } from "./Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-parts.component";
+import {
+  AdminServicesComponent
+} from "./Modules/Admin/Components/admin-dashboard/admin-services/admin-services.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -43,6 +46,7 @@ const routes: Routes = [
     children: [
       { path: 'users', component: AdminUsersComponent },
       { path: 'service-orders', component: AdminServiceOrdersComponent },
+      { path: 'services', component: AdminServicesComponent },
       { path: 'parts', component: AdminPartsComponent },
       { path: 'invoices', component: AdminInvoicesComponent },
       { path: 'complaints', component: AdminComplaintsComponent },

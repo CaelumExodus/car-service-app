@@ -23,7 +23,7 @@
       <td class="py-3 px-6 text-left" [ngClass]="{'text-red-700': part.quantityinstock <= 20}">{{ part.quantityinstock }}</td>
       <td class="py-3 px-6 text-left">{{ part.unitprice }}</td>
       <td class="py-3 px-6 text-left">{{ part.supplier }}</td>
-      <td class="py-3 px-6 text-left">
+      <td class="py-3 px-6 text-left flex gap-2 flex-wrap">
         <input
           #input
           type="number"

@@ -24,6 +24,7 @@ import { ServicePartsComponent } from './Modules/Service/service-dashboard/servi
 import { WarehouseDashboardComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-dashboard.component';
 import { WarehousePartsComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-parts.component';
 import { WarehouseAddPartModalComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-add-part-modal/warehouse-add-part-modal.component';
+import { AdminServicesComponent } from './Modules/Admin/Components/admin-dashboard/admin-services/admin-services.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { WarehouseAddPartModalComponent } from './Modules/Warehouse/warehouse-da
     ServicePartsComponent,
     WarehouseDashboardComponent,
     WarehousePartsComponent,
-    WarehouseAddPartModalComponent
+    WarehouseAddPartModalComponent,
+    AdminServicesComponent
   ],
   imports: [
     BrowserModule,

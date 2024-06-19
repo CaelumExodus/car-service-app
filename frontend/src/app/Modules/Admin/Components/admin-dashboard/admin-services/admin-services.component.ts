@@ -8,7 +8,7 @@ import { finalize } from "rxjs";
   templateUrl: './admin-services.component.html',
   styleUrl: './admin-services.component.scss'
 })
-export class AdminServicesComponent implements OnInit{
+export class AdminServicesComponent implements OnInit {
 
   public isLoading: boolean = false
   public services: Service[] = [];

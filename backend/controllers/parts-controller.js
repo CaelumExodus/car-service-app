@@ -43,3 +43,39 @@ exports.deletePart = async (req, res) => {
         res.sendStatus(500);
     }
 };
+
+exports.incrementQuantity = async (req, res) => {
+    const { id, quantity } = req.body;
+
+
+    try {
+        await pool.query('UPDATE parts SET quantityinstock = quantityinstock + $1 WHERE partid = $2', [quantity, id]);
+        res.status(200).send({ message: 'Quantity incremented successfully' });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+};
+
+exports.decrementQuantity = async (req, res) => {
+    const { id, quantity } = req.body;
+
+    try {
+        const result = await pool.query('SELECT quantityinstock FROM parts WHERE partid = $1', [id]);
+        const currentQuantity = result.rows[0]?.quantityinstock;
+
+        if (currentQuantity === undefined) {
+            return res.status(404).send({ message: 'Part not found' });
+        }
+
+        if (currentQuantity - quantity < 0) {
+            return res.status(400).send({ message: 'Insufficient stock to decrement by the specified amount' });
+        }
+
+        await pool.query('UPDATE parts SET quantityinstock = quantityinstock - $1 WHERE partid = $2', [quantity, id]);
+        res.status(200).send({ message: 'Quantity decremented successfully' });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+};

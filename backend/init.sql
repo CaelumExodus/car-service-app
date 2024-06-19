@@ -65,14 +65,6 @@ CREATE TABLE Complaints (
     ResolvedDate TIMESTAMP
 );
 
--- Dodawanie zleceń do części (relacja wiele-do-wielu)
-CREATE TABLE ServiceOrderParts (
-    OrderID INT REFERENCES ServiceOrders(OrderID),
-    PartID INT REFERENCES Parts(PartID),
-    Quantity INT NOT NULL,
-    PRIMARY KEY (OrderID, PartID)
-);
-
 INSERT INTO Users (Username, Password, Email, PhoneNumber, Role)
 VALUES
     ('admin', 'admin', 'admin@email.com', '+1234567890', 'admin'),

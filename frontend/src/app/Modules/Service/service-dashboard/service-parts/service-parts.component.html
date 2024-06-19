@@ -7,7 +7,7 @@
       <th class="py-3 px-6 text-left">Quantity</th>
       <th class="py-3 px-6 text-left">Price</th>
       <th class="py-3 px-6 text-left">Supplier</th>
-
+      <th class="py-3 px-6 text-left">Actions</th>
     </tr>
   </ng-container>
   <ng-container table-body>
@@ -18,7 +18,20 @@
       <td class="py-3 px-6 text-left">{{ part.quantityinstock }}</td>
       <td class="py-3 px-6 text-left">{{ part.unitprice }}</td>
       <td class="py-3 px-6 text-left">{{ part.supplier }}</td>
+      <td class="py-3 px-6 text-left">
+        <input
+          #input
+          type="number"
+          class="border rounded py-1 px-2 mr-2"
+          placeholder="Quantity"
+        />
+        <button
+          (click)="decrementPartsQuantity(input.value, part.partid)"
+          class="bg-green-700 text-white rounded py-1 px-3"
+        >
+          Take Parts
+        </button>
+      </td>
     </tr>
   </ng-container>
 </app-table-wrapper>
-

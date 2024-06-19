@@ -12,8 +12,7 @@ export class ServicePartsComponent implements OnInit {
 
   public isLoading: boolean = false
   public parts: Part[] = [];
-
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   ngOnInit(): void {
     this.fetchParts();
@@ -32,5 +31,25 @@ export class ServicePartsComponent implements OnInit {
           console.error('Error fetching service orders:', error);
         }
       );
+  }
+
+  decrementPartsQuantity(quantity: string, id: number): void {
+    if (!quantity) return;
+
+    this.isLoading = true;
+
+    this.http.post(`http://localhost:3000/parts/sub`, {
+      quantity,
+      id
+    })
+      .pipe(finalize((): boolean => this.isLoading = false))
+      .subscribe(
+        (): void => {
+          this.fetchParts();
+        },
+        error => {
+          console.error('Error fetching service orders:', error);
+        }
+      )
   }
 }

@@ -41,6 +41,8 @@ app.delete('/service-orders/:id', serviceOrdersController.deleteServiceOrder);
 // Routes for parts
 app.get('/parts', partsController.getParts);
 app.post('/parts', partsController.createPart);
+app.post('/parts/add', partsController.incrementQuantity);
+app.post('/parts/sub', partsController.decrementQuantity);
 app.put('/parts/:id', partsController.updatePart);
 app.delete('/parts/:id', partsController.deletePart);
 

@@ -27,6 +27,10 @@ import {
   ServiceServiceOrdersComponent
 } from "./Modules/Service/service-dashboard/service-service-orders/service-service-orders.component";
 import { ServicePartsComponent } from "./Modules/Service/service-dashboard/service-parts/service-parts.component";
+import { WarehouseDashboardComponent } from "./Modules/Warehouse/warehouse-dashboard/warehouse-dashboard.component";
+import {
+  WarehousePartsComponent
+} from "./Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-parts.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
@@ -68,6 +72,17 @@ const routes: Routes = [
       { path: 'parts', component: ServicePartsComponent },
       { path: '', redirectTo: 'service-orders', pathMatch: 'full' },
       { path: '**', redirectTo: 'service-orders', pathMatch: 'full'}
+    ]
+  },
+  {
+    path: 'warehouse',
+    component: WarehouseDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'warehouse' },
+    children: [
+      { path: 'parts', component: WarehousePartsComponent },
+      { path: '', redirectTo: 'parts', pathMatch: 'full' },
+      { path: '**', redirectTo: 'parts', pathMatch: 'full'}
     ]
   },
 ];

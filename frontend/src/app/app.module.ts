@@ -21,6 +21,8 @@ import { ClientAddServiceOrderModalComponent } from './Modules/Client/client-das
 import { ServiceDashboardComponent } from './Modules/Service/service-dashboard/service-dashboard.component';
 import { ServiceServiceOrdersComponent } from './Modules/Service/service-dashboard/service-service-orders/service-service-orders.component';
 import { ServicePartsComponent } from './Modules/Service/service-dashboard/service-parts/service-parts.component';
+import { WarehouseDashboardComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-dashboard.component';
+import { WarehousePartsComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-parts.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ServicePartsComponent } from './Modules/Service/service-dashboard/servi
     ClientAddServiceOrderModalComponent,
     ServiceDashboardComponent,
     ServiceServiceOrdersComponent,
-    ServicePartsComponent
+    ServicePartsComponent,
+    WarehouseDashboardComponent,
+    WarehousePartsComponent
   ],
   imports: [
     BrowserModule,

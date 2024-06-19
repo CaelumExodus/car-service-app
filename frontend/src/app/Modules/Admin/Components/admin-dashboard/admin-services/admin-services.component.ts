@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Service } from "../../../../../Models/Models";
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
@@ -8,7 +8,7 @@ import { finalize } from "rxjs";
   templateUrl: './admin-services.component.html',
   styleUrl: './admin-services.component.scss'
 })
-export class AdminServicesComponent {
+export class AdminServicesComponent implements OnInit{
 
   public isLoading: boolean = false
   public services: Service[] = [];

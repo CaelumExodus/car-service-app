@@ -1,3 +1,8 @@
+<button (click)="openAddModal()" class="bg-transparent hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-black rounded-2xl shadow-md w-full mb-5 h-12">
+  Add part
+</button>
+
+
 <app-table-wrapper [loading]="isLoading">
   <ng-container table-header>
     <tr>
@@ -41,3 +46,5 @@
     </tr>
   </ng-container>
 </app-table-wrapper>
+
+<app-warehouse-add-part-modal *ngIf="showAddModal" (closeModal)="closeAddModal($event)" ></app-warehouse-add-part-modal>

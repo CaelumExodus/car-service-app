@@ -12,10 +12,23 @@ export class WarehousePartsComponent implements OnInit{
 
   public isLoading: boolean = false
   public parts: Part[] = [];
+  public showAddModal: boolean = false;
+
+
   constructor(private readonly http: HttpClient) { }
 
   ngOnInit(): void {
     this.fetchParts();
+  }
+
+  openAddModal(): void {
+    this.showAddModal = true;
+  }
+
+  closeAddModal(submitted: boolean): void {
+    this.showAddModal = false;
+
+    submitted && this.fetchParts()
   }
 
   fetchParts(): void {

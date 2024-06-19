@@ -23,6 +23,7 @@ import { ServiceServiceOrdersComponent } from './Modules/Service/service-dashboa
 import { ServicePartsComponent } from './Modules/Service/service-dashboard/service-parts/service-parts.component';
 import { WarehouseDashboardComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-dashboard.component';
 import { WarehousePartsComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-parts.component';
+import { WarehouseAddPartModalComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-add-part-modal/warehouse-add-part-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { WarehousePartsComponent } from './Modules/Warehouse/warehouse-dashboard
     ServiceServiceOrdersComponent,
     ServicePartsComponent,
     WarehouseDashboardComponent,
-    WarehousePartsComponent
+    WarehousePartsComponent,
+    WarehouseAddPartModalComponent
   ],
   imports: [
     BrowserModule,

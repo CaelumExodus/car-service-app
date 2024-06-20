@@ -43,17 +43,6 @@ CREATE TABLE Parts (
     Supplier VARCHAR(100)
 );
 
--- Tworzenie tabeli Invoices
-CREATE TABLE Invoices (
-    InvoiceID SERIAL PRIMARY KEY,
-    OrderID INT REFERENCES ServiceOrders(OrderID),
-    ClientID INT REFERENCES Users(UserID),
-    Amount DECIMAL(10, 2) NOT NULL,
-    IssueDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    DueDate TIMESTAMP,
-    Status VARCHAR(20) NOT NULL
-);
-
 -- Tworzenie tabeli Complaints
 CREATE TABLE Complaints (
     ComplaintID SERIAL PRIMARY KEY,
@@ -95,11 +84,6 @@ INSERT INTO Parts (PartName, PartCategory, QuantityInStock, UnitPrice, Supplier)
 VALUES
     ('Screwdriver', 'Tools', 50, 5.00, 'Tool Suppliers Inc.'),
     ('Cleaning Solution', 'Cleaning Supplies', 100, 8.00, 'Cleaning Solutions LLC');
-
-INSERT INTO Invoices (OrderID, ClientID, Amount, IssueDate, DueDate, Status)
-VALUES
-    (1, 1, 50.00, '2024-06-15', '2024-06-30', 'Pending'),
-    (2, 2, 150.00, '2024-06-14', '2024-06-29', 'Paid');
 
 INSERT INTO Complaints (OrderID, ClientID, Description, Status, CreatedDate, ResolvedDate)
 VALUES

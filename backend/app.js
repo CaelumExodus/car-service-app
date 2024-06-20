@@ -6,6 +6,7 @@ const serviceOrdersController = require('./controllers/service-orders-controller
 const partsController = require('./controllers/parts-controller');
 const invoicesController = require('./controllers/invoices-controller');
 const complaintsController = require('./controllers/complaints-controller');
+const invoiceController = require('./controllers/invoice-controller');
 const port = 3000;
 
 const app = express();
@@ -58,5 +59,8 @@ app.get('/complaints/:clientId', complaintsController.getComplaints);
 app.post('/complaints', complaintsController.createComplaint);
 app.put('/complaints/:id', complaintsController.updateComplaint);
 app.delete('/complaints/:id', complaintsController.deleteComplaint);
+
+// Routes for invoices
+app.get('/invoices/:orderId', invoiceController.generateInvoice);
 
 app.listen(port, () => console.log(`Server running on port: ${port}`));

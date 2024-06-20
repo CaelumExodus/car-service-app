@@ -37,6 +37,27 @@ export class ClientServiceOrdersComponent implements OnInit {
     return serviceNameArray?.join(' | ');
   }
 
+  getServiceOrderInvoice(order: ServiceOrder): void {
+    this.isLoading = true;
+
+    this.http.get(`http://localhost:3000/invoices/${order.orderid}`, {
+      responseType: 'blob'
+    })
+      .subscribe((blob: Blob): void => {
+        const url: string = window.URL.createObjectURL(blob);
+
+        const a: HTMLAnchorElement = document.createElement('a');
+        a.href = url;
+        a.download = `invoice_${order.orderid}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, error => {
+        console.error('Error downloading invoice:', error);
+      });
+  }
+
   fetchServices(): void {
     const userId: number | undefined = this.authService.getUserId();
 

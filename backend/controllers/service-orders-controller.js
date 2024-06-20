@@ -43,7 +43,6 @@ exports.getServiceOrdersWithServicesByClient = async (req, res) => {
             return res.status(404).json({ error: 'No service orders found for the specified client' });
         }
 
-        // Grouping service orders with their services
         const serviceOrdersWithServices = {};
         rows.forEach(row => {
             const orderId = row.orderid;
@@ -67,7 +66,6 @@ exports.getServiceOrdersWithServicesByClient = async (req, res) => {
             });
         });
 
-        // Convert object to array of service orders
         const serviceOrdersArray = Object.values(serviceOrdersWithServices);
 
         res.status(200).json(serviceOrdersArray);

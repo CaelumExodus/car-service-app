@@ -1,8 +1,6 @@
 const pool = require('../db');
 
 const PDFDocument = require('pdfkit');
-const fs = require('fs');
-const path = require('path');
 
 exports.generateInvoice = async (req, res) => {
     const { orderId } = req.params;

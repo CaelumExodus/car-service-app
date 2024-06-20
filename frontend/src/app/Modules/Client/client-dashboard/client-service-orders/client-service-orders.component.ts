@@ -38,7 +38,6 @@ export class ClientServiceOrdersComponent implements OnInit {
   }
 
   getServiceOrderInvoice(order: ServiceOrder): void {
-    this.isLoading = true;
 
     this.http.get(`http://localhost:3000/invoices/${order.orderid}`, {
       responseType: 'blob'

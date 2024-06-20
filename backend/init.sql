@@ -87,5 +87,5 @@ VALUES
 
 INSERT INTO Complaints (OrderID, ClientID, Description, Status, CreatedDate, ResolvedDate)
 VALUES
-    (1, 1, 'Service not completed as expected.', 'Open', '2024-06-15 11:30:00', NULL),
-    (2, 2, 'Part of the service was not satisfactory.', 'Resolved', '2024-06-14 18:00:00', '2024-06-15 09:00:00');
+    (1, 1, 'Service not completed as expected.', 'open', '2024-06-15 11:30:00', NULL),
+    (2, 2, 'Part of the service was not satisfactory.', 'resolved', '2024-06-14 18:00:00', '2024-06-15 09:00:00');

@@ -14,6 +14,8 @@ export class ClientServiceOrdersComponent implements OnInit {
   public isLoading: boolean = false
   public serviceOrders: ServiceOrder[] = [];
   public showAddModal: boolean = false;
+  public showComplaintModal: boolean = false;
+  public chosenOrderIdForComplaint: number = 0;
 
   constructor(private http: HttpClient, private readonly authService: AuthService) { }
 
@@ -27,6 +29,18 @@ export class ClientServiceOrdersComponent implements OnInit {
 
   closeAddModal(submitted: boolean): void {
     this.showAddModal = false;
+
+    submitted && this.fetchServices()
+  }
+
+  openComplaintModal(orderId: number): void {
+    this.chosenOrderIdForComplaint = orderId;
+    this.showComplaintModal = true;
+  }
+
+  closeComplaintModal(submitted: boolean): void {
+    this.chosenOrderIdForComplaint = 0;
+    this.showComplaintModal = false;
 
     submitted && this.fetchServices()
   }

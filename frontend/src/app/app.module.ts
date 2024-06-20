@@ -25,6 +25,7 @@ import { WarehouseDashboardComponent } from './Modules/Warehouse/warehouse-dashb
 import { WarehousePartsComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-parts.component';
 import { WarehouseAddPartModalComponent } from './Modules/Warehouse/warehouse-dashboard/warehouse-parts/warehouse-add-part-modal/warehouse-add-part-modal.component';
 import { AdminServicesComponent } from "./Modules/Admin/Components/admin-dashboard/admin-services/admin-services.component";
+import { ClientCreateComplaintModalComponent } from './Modules/Client/client-dashboard/client-service-orders/client-create-complain-modal/client-create-complaint-modal.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { AdminServicesComponent } from "./Modules/Admin/Components/admin-dashboa
     WarehouseDashboardComponent,
     WarehousePartsComponent,
     WarehouseAddPartModalComponent,
-    AdminServicesComponent
+    AdminServicesComponent,
+    ClientCreateComplaintModalComponent
   ],
   imports: [
     BrowserModule,

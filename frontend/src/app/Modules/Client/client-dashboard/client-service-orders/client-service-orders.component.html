@@ -20,10 +20,14 @@
       <td class="py-3 px-6 text-left">{{ getServicesNameFromDetailsToString(order) ?? '' }}</td>
       <td class="py-3 px-6 text-left">{{ order.createddate ? (order.createddate | date) : '-' }}</td>
       <td class="py-3 px-6 text-left">{{ order.completeddate ? (order.completeddate | date) : '-' }}</td>
-      <td class="py-3 px-6 text-left">
+      <td class="py-3 px-6 text-left flex gap-2">
         <svg (click)="getServiceOrderInvoice(order)" class="w-[20px] h-[20px] text-gray-800 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path fill-rule="evenodd" d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Zm2 0V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Zm2-2a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2h-3Zm0 3a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2h-3Zm-6 4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-6Zm8 1v1h-2v-1h2Zm0 3h-2v1h2v-1Zm-4-3v1H9v-1h2Zm0 3H9v1h2v-1Z" clip-rule="evenodd"/>
         </svg>
+        <svg (click)="openComplaintModal(order.orderid)" class="w-[20px] h-[20px] text-red-600 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+        </svg>
+
 
       </td>
     </tr>
@@ -31,3 +35,4 @@
 </app-table-wrapper>
 
 <app-client-add-service-order-modal *ngIf="showAddModal" (closeModal)="closeAddModal($event)"></app-client-add-service-order-modal>
+<app-client-create-complaint-modal *ngIf="showComplaintModal" [serviceOrderId]="chosenOrderIdForComplaint" (closeModal)="closeComplaintModal($event)"></app-client-create-complaint-modal>

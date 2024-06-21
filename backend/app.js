@@ -4,7 +4,6 @@ const usersController = require('./controllers/users-controller');
 const servicesController = require('./controllers/services-controller');
 const serviceOrdersController = require('./controllers/service-orders-controller');
 const partsController = require('./controllers/parts-controller');
-const invoicesController = require('./controllers/invoices-controller');
 const complaintsController = require('./controllers/complaints-controller');
 const invoiceController = require('./controllers/invoice-controller');
 const port = 3000;
@@ -46,12 +45,6 @@ app.post('/parts/add', partsController.incrementQuantity);
 app.post('/parts/sub', partsController.decrementQuantity);
 app.put('/parts/:id', partsController.updatePart);
 app.delete('/parts/:id', partsController.deletePart);
-
-// Routes for invoices
-app.get('/invoices', invoicesController.getInvoices);
-app.post('/invoices', invoicesController.createInvoice);
-app.put('/invoices/:id', invoicesController.updateInvoice);
-app.delete('/invoices/:id', invoicesController.deleteInvoice);
 
 // Routes for complaints
 app.get('/complaints', complaintsController.getComplaints);

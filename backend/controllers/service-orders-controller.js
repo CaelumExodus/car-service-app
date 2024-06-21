@@ -57,7 +57,6 @@ exports.getServiceOrdersWithServicesByClient = async (req, res) => {
                     services: [],
                 };
             }
-            // Add service details to services array
             serviceOrdersWithServices[orderId].services.push({
                 serviceid: row.serviceid,
                 servicename: row.servicename,
@@ -92,7 +91,6 @@ exports.getAllServiceOrdersWithServices = async (req, res) => {
             return res.status(404).json({ error: 'No service orders found' });
         }
 
-        // Grouping service orders with their services
         const serviceOrdersWithServices = {};
         rows.forEach(row => {
             const orderId = row.orderid;
@@ -107,7 +105,6 @@ exports.getAllServiceOrdersWithServices = async (req, res) => {
                     services: [],
                 };
             }
-            // Add service details to services array
             serviceOrdersWithServices[orderId].services.push({
                 serviceid: row.serviceid,
                 servicename: row.servicename,
@@ -116,7 +113,6 @@ exports.getAllServiceOrdersWithServices = async (req, res) => {
             });
         });
 
-        // Convert object to array of service orders
         const serviceOrdersArray = Object.values(serviceOrdersWithServices);
 
         res.status(200).json(serviceOrdersArray);
@@ -128,37 +124,30 @@ exports.getAllServiceOrdersWithServices = async (req, res) => {
 
 
 
-// Function to create a new service order
 exports.createServiceOrder = async (req, res) => {
     const { clientid, status, totalcost, serviceorderdetails } = req.body;
 
     try {
-        // Start a transaction to ensure all queries are atomic
         const client = await pool.connect();
         await client.query('BEGIN');
 
-        // Insert into serviceorders table
         const insertOrderQuery = 'INSERT INTO serviceorders (clientid, status, totalcost) VALUES ($1, $2, $3) RETURNING orderid';
         const orderValues = [clientid, status, totalcost];
         const orderResult = await client.query(insertOrderQuery, orderValues);
         const orderId = orderResult.rows[0].orderid;
 
-        // Prepare the query for inserting into serviceorderdetails table
         const insertDetailsQuery = 'INSERT INTO serviceorderdetails (orderid, serviceid) VALUES ($1, $2)';
 
-        // Insert each service detail into serviceorderdetails
         for (const detail of serviceorderdetails) {
             const detailValues = [orderId, detail.serviceId];
             await client.query(insertDetailsQuery, detailValues);
         }
 
-        // Commit the transaction
         await client.query('COMMIT');
         client.release();
 
         res.status(201).json({ message: 'Service order created successfully' });
     } catch (err) {
-        // Rollback the transaction in case of any error
         await client.query('ROLLBACK');
         client.release();
 

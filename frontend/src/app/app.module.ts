@@ -11,7 +11,6 @@ import { AdminUsersComponent } from './Modules/Admin/Components/admin-dashboard/
 import { TableWrapperComponent } from './Modules/Shared/Components/table-wrapper/table-wrapper.component';
 import { AdminServiceOrdersComponent } from './Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component';
 import { AdminPartsComponent } from './Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component';
-import { AdminInvoicesComponent } from './Modules/Admin/Components/admin-dashboard/admin-invoices/admin-invoices.component';
 import { AdminComplaintsComponent } from './Modules/Admin/Components/admin-dashboard/admin-complaints/admin-complaints.component';
 import { AdminEditUserModalComponent } from './Modules/Admin/Components/admin-dashboard/admin-users/admin-edit-user-modal/admin-edit-user-modal.component';
 import { ClientDashboardComponent } from './Modules/Client/client-dashboard/client-dashboard.component';
@@ -37,7 +36,6 @@ import { ClientCreateComplaintModalComponent } from './Modules/Client/client-das
     TableWrapperComponent,
     AdminServiceOrdersComponent,
     AdminPartsComponent,
-    AdminInvoicesComponent,
     AdminComplaintsComponent,
     AdminEditUserModalComponent,
     ClientDashboardComponent,

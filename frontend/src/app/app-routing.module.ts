@@ -10,9 +10,6 @@ import {
 } from "./Modules/Admin/Components/admin-dashboard/admin-service-orders/admin-service-orders.component";
 import {AdminPartsComponent} from "./Modules/Admin/Components/admin-dashboard/admin-parts/admin-parts.component";
 import {
-  AdminInvoicesComponent
-} from "./Modules/Admin/Components/admin-dashboard/admin-invoices/admin-invoices.component";
-import {
   AdminComplaintsComponent
 } from "./Modules/Admin/Components/admin-dashboard/admin-complaints/admin-complaints.component";
 import { ClientDashboardComponent } from "./Modules/Client/client-dashboard/client-dashboard.component";
@@ -48,7 +45,6 @@ const routes: Routes = [
       { path: 'service-orders', component: AdminServiceOrdersComponent },
       { path: 'services', component: AdminServicesComponent },
       { path: 'parts', component: AdminPartsComponent },
-      { path: 'invoices', component: AdminInvoicesComponent },
       { path: 'complaints', component: AdminComplaintsComponent },
       { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: '**', redirectTo: 'users' }

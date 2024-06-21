@@ -159,9 +159,18 @@ exports.createServiceOrder = async (req, res) => {
 exports.updateServiceOrder = async (req, res) => {
     const { id } = req.params;
     const { clientid, status, totalcost } = req.body;
+
     try {
-        const query = 'UPDATE serviceorders SET clientid = $1, status = $2, totalcost = $3 WHERE orderid = $4';
-        await pool.query(query, [clientid, status, totalcost, id]);
+        let query, params;
+        if (status === 'completed') {
+            query = 'UPDATE serviceorders SET clientid = $1, status = $2, totalcost = $3, completeddate = CURRENT_TIMESTAMP WHERE orderid = $4';
+            params = [clientid, status, totalcost, id];
+        } else {
+            query = 'UPDATE serviceorders SET clientid = $1, status = $2, totalcost = $3 WHERE orderid = $4';
+            params = [clientid, status, totalcost, id];
+        }
+
+        await pool.query(query, params);
         res.status(200).json({ message: 'Service order updated successfully' });
     } catch (err) {
         console.error('Error updating service order:', err);
